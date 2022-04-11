@@ -25,7 +25,7 @@ if (!isset($_COOKIE['user'])) {
 				    </button>
 	  			</div>
 			  <div class="modal-body">
-			  	<div class="alert alert-danger alert-dismissible fade" id="form_error" role="alert">
+			  	<div class="alert alert-danger alert-dismissible fade" style="display: none" id="form_error" role="alert">
 				  <strong id="error">Please Fill All the fields.</strong>
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				    <span aria-hidden="true">&times;</span>
@@ -41,6 +41,18 @@ if (!isset($_COOKIE['user'])) {
 			    			<label>phone: </label>
 			    			<input type="number" name="phone" class="form-control" id="phone" required>
 			    		</div>
+			    		<div class="col-md-6">
+			    			<label>Gender:</label>
+			    			<input class="form-control" list="gender" name="gender" id="genderValue" required>
+							<datalist id="gender">
+							  <option value="male">
+							  <option value="female">
+							</datalist>
+			    		</div>	
+			    			<div class="col-md-6">
+			    			<label>Age:</label>
+			    			<input class="form-control" type="number" name="age" id="age" required>
+			    		</div>		
 			    		<div class="col-md-6">
 			    			<label>Service: </label>
 			    			<input type="text" name="service" class="form-control" id="service" required>
@@ -105,7 +117,7 @@ if (!isset($_COOKIE['user'])) {
 					<tbody>
 						<?php
 							require_once '../config/config.php';
-							$query = "SELECT * FROM patients where status=1";
+							$query = "SELECT * FROM patients where status=1 ORDER BY id DESC";
 							$getAllData = $conn->prepare($query);
 							$getAllData->execute();
 							$rowCount = $getAllData->rowCount();
@@ -166,8 +178,10 @@ $(document).ready(function() {
 	  	var date = $("#date").val();
 	  	var amount = $("#amount").val();
 	  	var paymentType = $("#paymentType").val();
+	  	var age = $("#age").val();
+	  	var gender = $("#genderValue").val();
 
-	  	if (name != '' && phone != '' && service != '' && date != '' && amount != '' && paymentType != '') {
+	  	if (name != '' && phone != '' && service != '' && date != '' && amount != '' && paymentType != '' && age != '' && gender != '') {
 	  		$.ajax({
 				url: "../scripts/patient/create.php",
 				method: 'POST',
@@ -177,7 +191,9 @@ $(document).ready(function() {
 					service: service,
 					date: date,
 					amount: amount,
-					paymentType: paymentType
+					paymentType: paymentType,
+					age: age,
+					gender: gender,
 				},
 				success:function(result){
 					res = JSON.parse(result);
@@ -211,8 +227,11 @@ $(document).ready(function() {
 	  	var date = $("#date").val();
 	  	var amount = $("#amount").val();
 	  	var paymentType = $("#paymentType").val();
+	  	var age = $("#age").val();
+	  	var gender = $("#genderValue").val();
 	  	var id = $("#p_id").val();
-	  	if (id != '' && name != '' && phone != '' && service != '' && date != '' && amount != '' && paymentType != '') {
+
+	  	if (id != '' && name != '' && phone != '' && service != '' && date != '' && amount != '' && paymentType != '' && age != '' && gender != '') {
 	  		$.ajax({
 				url: "../scripts/patient/update.php",
 				method: 'POST',
@@ -223,7 +242,9 @@ $(document).ready(function() {
 					service: service,
 					date: date,
 					amount: amount,
-					paymentType: paymentType
+					paymentType: paymentType,
+					age: age,
+					gender: gender
 				},
 				success:function(result){
 					res = JSON.parse(result);
@@ -286,6 +307,8 @@ function deletePatient(id) {
 					  	 $("#service").val(res.service);
 					  	 $("#date").val(res.date);
 					  	 $("#amount").val(res.amount);
+					  	 $('#age').val(res.age);
+					  	 $("#genderValue").val(res.gender);
 					  	 $("#p_id").val(res.id);
 					  	 $("#paymentType").val(res.paymentType);
 					  	 $("#submitBtn").hide();

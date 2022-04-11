@@ -11,7 +11,7 @@ if (!isset($_COOKIE['user'])) {
       <div class="container text-center wow zoomIn">
         <span class="subhead">Let's make your life happier</span>
         <h1 class="display-4">Healthy Living</h1>
-        <a href="#" class="btn btn-primary">Let's Consult</a>
+        <a href="createPatients.php" class="btn btn-primary">Patients</a>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@ if (!isset($_COOKIE['user'])) {
               <div class="circle-shape bg-secondary text-white">
                 <span class="mai-chatbubbles-outline"></span>
               </div>
-              <p><span>Clients</span> Detail</p>
+              <p><span>Patients</span> Detail</p>
             </div>
           </div>
           <div class="col-md-4 py-3 py-md-0">
@@ -40,7 +40,7 @@ if (!isset($_COOKIE['user'])) {
               <div class="circle-shape bg-accent text-white">
                 <span class="mai-basket"></span>
               </div>
-              <p><span>Send</span>Invoice with E-mails.</p>
+              <p><span>Generate</span> Receipt.</p>
             </div>
           </div>
         </div>

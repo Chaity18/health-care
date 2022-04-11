@@ -16,8 +16,10 @@ if (!empty($id)) {
 		$amount = $d['amount'];
 		$service = $d['service'];
 		$paymentType = $d['payment_type'];
+		$age = $d['age'];
+		$gender = $d['gender'];
 	}	
-	$response = ['success' => true, 'id' => $id, 'name' => $name, 'phone' => $phone, 'date' => $date, 'amount' => $amount, 'service' => $service, 'paymentType' => $paymentType];
+	$response = ['success' => true, 'id' => $id, 'name' => $name, 'phone' => $phone, 'date' => $date, 'amount' => $amount, 'service' => $service, 'paymentType' => $paymentType, 'age' => $age, 'gender' => $gender];
 
 	echo json_encode($response);
 }

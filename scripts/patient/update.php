@@ -8,8 +8,10 @@ require_once '../../config/config.php';
 	$amount = $_REQUEST['amount'];
 	$paymentType = $_REQUEST['paymentType'];
 	$id = $_REQUEST['id'];
+	$age = $_REQUEST['age'];
+	$gender = $_REQUEST['gender'];
 
-	$query = "UPDATE `patients` SET `name`= '$name',`phone`='$phone',`service`='$service',`date`='$date',`amount`='$amount',`payment_type`='$paymentType' WHERE id=$id"; 
+	$query = "UPDATE `patients` SET `name`= '$name',`phone`='$phone',`age`='$age',`gender`='$gender',`service`='$service',`date`='$date',`amount`='$amount',`payment_type`='$paymentType' WHERE id=$id"; 
 
 	$updatePatient = $conn->prepare($query);
 	if ($updatePatient->execute()) {
